@@ -3,6 +3,7 @@ import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { SortingOptions } from './sorting.enum';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,8 @@ export class AppComponent implements OnInit {
   public employees: Employee[];
   public editEmployee: Employee;
   public deleteEmployee: Employee;
+  
+  sortingOption: SortingOptions = SortingOptions.Default;
 
   constructor(private employeeService: EmployeeService){}
 
@@ -30,6 +33,11 @@ export class AppComponent implements OnInit {
         alert(error.message);
       }
     );
+  }
+  sortEmployees() {
+    this.employeeService.sortEmployeesByGender(this.sortingOption).subscribe((data) => {
+      this.employees = data;
+    });
   }
 
   public onAddEmployee(addForm: NgForm): void {
@@ -85,7 +93,9 @@ export class AppComponent implements OnInit {
     }
     this.employees = results;
     if (results.length === 0 || !key) {
-      this.getEmployees();
+      setTimeout(() => {
+        this.getEmployees();
+      }, 3000); // 3000 milliseconds (3 seconds)
     }
   }
 
