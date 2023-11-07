@@ -1,4 +1,4 @@
-name: Docker CI/CD
+name: frontend CI/CD
 
 on:
   push:
@@ -10,23 +10,44 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      # Step 1: Check out the latest code from your repository
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Docker Buildx (optional but recommended)
-      uses: docker/setup-buildx-action@v1
+      # Step 2: Set up Docker Buildx (optional but recommended)
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 14
+      # Step 3: Set up Node.js (use the specified Node.js version)
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
 
-    - name: Install dependencies
-      run: npm install
+      # Step 4: Install project dependencies (npm packages)
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build Docker image
-      run: |
-        docker build -t my-app-image .
-        docker login -u moislam -p ${{ secrets.DOCKER_ACCESS_TOKEN }}
-        docker tag my-app-image:latest moislam/frontend-angular-repository:latest
-        docker push moislam/frontend-angular-repository:latest
+      # Step 5: Build a Docker image for your application
+      - name: Build Docker image
+        run: |
+          # Build a Docker image with the specified tag
+          docker build -t my-app-image .
+
+          # Log in to Docker Hub using the provided access token
+          docker login -u moislam -p ${{ secrets.DOCKER_ACCESS_TOKEN }}
+
+          # Tag the image with a repository name and the "latest" tag
+          docker tag my-app-image:latest moislam/frontend-angular-repository:latest
+
+          # Push the Docker image to Docker Hub
+          docker push moislam/frontend-angular-repository:latest
+
+      # Additional steps can be added here, such as running tests or deploying
+
+      # Step 6: Deploy to a target environment or perform other tasks
+      - name: Deploy to Production (Add your deployment step here)
+        run: |
+          # Add your deployment script or commands here
+
+# End of the workflow
