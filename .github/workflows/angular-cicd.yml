@@ -46,26 +46,6 @@ jobs:
       # Additional steps can be added here, such as running tests or deploying
 
       # Step 6: Deploy to a target environment or perform other tasks
-      - name: Conventional Changelog Action
-        id: changelog
-        uses: TriPSs/conventional-changelog-action@v3
-        with:
-          github-token: ${{ secrets.ACTIONS_TOKEN }}
-          output-file: "false"
-
-      - name: Create Release
-        uses: actions/create-release@v1
-        if: ${{ steps.changelog.outputs.skipped == 'false' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
-        with:
-          tag_name: ${{ steps.changelog.outputs.tag }}
-          release_name: ${{ steps.changelog.outputs.tag }}
-          body: ${{ steps.changelog.outputs.clean_changelog }}
-
-      - name: Deploy
-        run: |
-          npm run deploy
       
 
 
