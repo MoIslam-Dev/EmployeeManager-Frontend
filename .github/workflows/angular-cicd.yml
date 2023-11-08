@@ -47,7 +47,10 @@ jobs:
 
       # Step 6: Deploy to a target environment or perform other tasks
       - name: Deploy to Production (Add your deployment step here)
-        run: |
-          # Add your deployment script or commands here
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.ACTIONS_TOKEN }}
+          publish_dir: ./dist/EmployeeManager-Frontend
+
 
 # End of the workflow
