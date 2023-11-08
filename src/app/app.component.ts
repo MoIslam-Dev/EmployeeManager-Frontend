@@ -11,6 +11,7 @@ import { SortingOptions } from './sorting.enum';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  title = 'front_endemployeemanagerapp';
   public employees: Employee[];
   public editEmployee: Employee;
   public deleteEmployee: Employee;
