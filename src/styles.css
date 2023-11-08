@@ -34,7 +34,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   
   #Dropdown .form-control:hover {
-    background-color: #793f3f; 
+    background-color: #f0f0f0; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
   }
   
