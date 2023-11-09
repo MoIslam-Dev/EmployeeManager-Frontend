@@ -43,10 +43,6 @@ jobs:
           # Push the Docker image to Docker Hub
           docker push moislam/frontend-angular-repository:latest
 
-      # Additional steps can be added here, such as running tests or deploying
-
-      # Step 6: Deploy to a target environment or perform other tasks
-      
 
 
 # End of the workflow
